@@ -1,0 +1,18 @@
+<form #f="ngForm" ngSubmit="submitForm(f)" class="register">
+  <mat-form-field >
+    <input placeholder="firstname" matInput name="firstname" type="text" [(ngModel)]="firstname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="lastname" placeholder="lastname" type="text" [(ngModel)]="lastname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="street" placeholder="street" type="text" [(ngModel)]="street">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="phone" type="text" placeholder="phone" [(ngModel)]="phone">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="password" type="password" placeholder="password" [(ngModel)]="password">
+  </mat-form-field>
+  <button mat-button type="submit">Send</button>
+</form>
