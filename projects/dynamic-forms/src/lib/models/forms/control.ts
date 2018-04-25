@@ -1,10 +1,11 @@
 import { Option } from './option';
 import { Validator } from '../validators/validator';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn, Validators, FormControl } from '@angular/forms';
 
 export abstract class Control {
   public validators: ValidatorFn[];
   public name: string;
+  public value: any;
   public label: string;
   constructor(control: any) {
     this.label = control.label;
@@ -12,5 +13,9 @@ export abstract class Control {
     this.validators = control.validators.map(validator => {
       return new Validator(validator.type, validator.argument);
     });
+  }
+
+  getControl() {
+    return new FormControl(this.value, this.validators);
   }
 }

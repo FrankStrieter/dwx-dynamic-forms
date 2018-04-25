@@ -12,8 +12,4 @@ export class Input extends Control {
     this.kind = control.kind;
     this.placeholder = control.placeholder;
   }
-
-  getControl() {
-    return new FormControl(this.value, this.validators);
-  }
 }

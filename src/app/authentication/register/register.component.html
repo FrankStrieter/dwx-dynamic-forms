@@ -1,74 +1,31 @@
 <form #f="ngForm" [formGroup]="form" (ngSubmit)="submitForm(f)" class="register">
-  <!-- <mat-form-field >
-    <mat-select 
-    [(ngModel)]="salutation" 
-    name="salutation"
-      placeholder="salutation">
-      <mat-option value="mr">Mr</mat-option>
-      <mat-option value="mrs">Mrs</mat-option>
-    </mat-select>
-  </mat-form-field> -->
+    <ng-container *ngFor="let c of formData | properties">
+      <ng-container [ngSwitch]="c.value.type">
+          <libdf-input *ngSwitchCase="'input'" [form]="form" [control]="c.value"></libdf-input>
+          <libdf-checkbox *ngSwitchCase="'checkbox'" [form]="form" [control]="c.value"></libdf-checkbox>
+          <libdf-radiogroup *ngSwitchCase="'radiogroup'" [form]="form" [control]="c.value"></libdf-radiogroup>
+        
+          <ng-container *ngSwitchCase="'array'">
+              <ng-container [formArrayName]="c.name" *ngFor="let item of form.get(c.name).controls; index as i">
+                  <ng-container [ngSwitch]="c.value.items[i].type">
+                      <libdf-input *ngSwitchCase="'input'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-input>
+                      <libdf-checkbox *ngSwitchCase="'checkbox'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-checkbox>
+                      <libdf-radiogroup *ngSwitchCase="'radiogroup'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-radiogroup>
+                  </ng-container>
+                </ng-container>
 
-  <!-- <mat-form-field>   -->
-  <libdf-input [form]="form" [control]="this.testdata.name"></libdf-input>
-    <!-- <input 
-    matInput 
-    [(ngModel)]="firstname"
-    name="firstname" 
-    type="text" 
-    placeholder="firstname">  
-  </mat-form-field> -->
+          </ng-container>
+      
+        </ng-container>
+    <ng-container *ngIf="isArrayControl(c.value)">
+      
+    
+    </ng-container>
+  <!-- <ng-container formArrayName="tags" *ngFor="let item of form.get('tags').controls; index as i">
+      <libdf-input [form]="form.get('tags')" [control]="formdata.tags[i]"></libdf-input>
+  </ng-container> -->
+</ng-container>
 
-  <libdf-checkbox [form]="form" [control]="this.testdata.terms"></libdf-checkbox>
-
-  <libdf-radiogroup [form]="form" [control]="this.testdata.relationship"></libdf-radiogroup>
-
-
-  <ng-container formArrayName="tags" *ngFor="let item of form.get('tags').controls; index as i">
-      <libdf-input [form]="form.get('tags')" [control]="this.testdata.tags[i]"></libdf-input>
-  </ng-container>
-  
-
-<!-- <mat-form-field>
-    <input 
-    matInput 
-    [(ngModel)]="firstname"
-    name="firstname" 
-    type="text" 
-    placeholder="firstname"> 
-  </mat-form-field> 
-  <mat-form-field>
-    <input 
-    matInput 
-    [(ngModel)]="lastname"
-    name="lastname" 
-    type="text" 
-    placeholder="lastname"> 
-  </mat-form-field>
-  <mat-form-field>
-    <input 
-    matInput 
-    [(ngModel)]="street"
-    name="street" 
-    type="text" 
-    placeholder="street"> 
-  </mat-form-field>
-  <mat-form-field>
-    <input 
-    matInput 
-    [(ngModel)]="phone"
-    name="phone" 
-    type="text" 
-    placeholder="phone"> 
-  </mat-form-field>
-  <mat-form-field>
-    <input 
-    matInput 
-    [(ngModel)]="password"
-    name="password" 
-    type="password" 
-    placeholder="password"> 
-  </mat-form-field> -->
   <button 
   [disabled]="!form.valid"
   mat-button 
@@ -76,3 +33,8 @@
   Send
   </button>
 </form>
+<code>
+    <pre>
+{{form.value | json}}
+</pre>
+</code>

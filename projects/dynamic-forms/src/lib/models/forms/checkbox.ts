@@ -6,7 +6,8 @@ export class Checkbox extends Control {
   text: string;
   value: boolean;
 
-  getControl() {
-    return new FormControl(this.value, this.validators);
+  constructor(control: any) {
+    super(control);
+    this.value = control.value;
   }
 }

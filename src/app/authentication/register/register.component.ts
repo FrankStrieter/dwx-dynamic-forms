@@ -20,12 +20,20 @@ export class RegisterComponent {
 
   form: FormGroup = new FormGroup({});
 
-  testdata: any = {
+  formData: any = {
     name: {
       type: 'input',
       name: 'name',
       value: 'Frank',
       placeholder: 'Name',
+      kind: 'text',
+      validators: [{ type: 'required' }],
+    },
+    lastname: {
+      type: 'input',
+      name: 'lastname',
+      value: '',
+      placeholder: 'Nachname',
       kind: 'text',
       validators: [{ type: 'required' }],
     },
@@ -36,69 +44,74 @@ export class RegisterComponent {
       value: false,
       validators: [{ type: 'requiredTrue' }],
     },
+    okay: {
+      type: 'checkbox',
+      label: 'Sparbuch überschreiben',
+      name: 'okay',
+      value: true,
+      validators: [],
+    },
     relationship: {
       type: 'radiogroup',
       label: 'Please choose',
       name: 'relationship',
-      value: '',
+      value: 'b2b',
       options: [{ key: 'b2b', value: 'b2b' }, { key: 'b2c', value: 'b2c' }],
       validators: [],
     },
-    tags: [
-      {
-        type: 'input',
-        value: 'Priority 1',
-        placeholder: 'Tag',
-        kind: 'text',
-        validators: [{ type: 'required' }],
-      },
-      {
-        type: 'input',
-        value: 'Test 2',
-        placeholder: 'Tag',
-        kind: 'text',
-        validators: [{ type: 'required' }],
-      },
-      {
-        type: 'input',
-        value: 'Test 5',
-        placeholder: 'Tag',
-        kind: 'text',
-        validators: [{ type: 'required' }],
-      },
-    ],
+    tags: {
+      type: 'array',
+      name: 'Tags',
+      items: [
+        {
+          type: 'input',
+          value: 'Priority 1',
+          placeholder: 'Tag',
+          kind: 'text',
+          validators: [{ type: 'required' }],
+        },
+        {
+          type: 'input',
+          value: 'Test 2',
+          placeholder: 'Tag',
+          kind: 'text',
+          validators: [{ type: 'required' }],
+        },
+        {
+          type: 'input',
+          value: 'Test 5',
+          placeholder: 'Tag',
+          kind: 'text',
+          validators: [{ type: 'required' }],
+        },
+      ],
+    },
   };
 
   constructor(formBuilder: FormBuilder, factory: FormsFactoryService) {
-    for (const test in this.testdata) {
-      if (this.testdata[test].type) {
+    for (const property in this.formData) {
+      if (this.formData[property].type !== 'array') {
         this.form.addControl(
-          test,
-          factory.createCustomControl(this.testdata[test])
+          property,
+          factory.createCustomControl(this.formData[property])
         );
-      } else if (Array.isArray(this.testdata[test])) {
+      } else if (this.formData[property].type === 'array') {
         this.form.addControl(
-          test,
+          property,
           formBuilder.array(
-            factory.createCustomControlArray(this.testdata[test])
+            factory.createCustomControlArray(this.formData[property].items)
           )
         );
-        console.log(this.form);
       }
     }
-
-    // this.form.addControl(
-    //   'name',
-    //   factory.createInputControl(this.testdata.name)
-    // );
-    // this.form.addControl(
-    //   'terms',
-    //   factory.createCheckboxControl(this.testdata.terms)
-    // );
   }
 
   submitForm(form: NgForm) {
     console.log(form.value);
     // this.apiService.post(url, form.value);
+  }
+
+  isArrayControl(control) {
+    return Array.isArray(control);
   }
 }

@@ -11,8 +11,4 @@ export class Radiogroup extends Control {
     this.options = control.options;
     this.value = control.value;
   }
-
-  getControl() {
-    return new FormControl(this.value, this.validators);
-  }
 }
