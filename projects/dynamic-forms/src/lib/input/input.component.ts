@@ -10,6 +10,7 @@ import { Input as CustomInput } from '../models/forms/input';
 export class InputComponent implements OnInit {
   @Input() control: CustomInput;
   @Input() form: FormGroup;
+  @Input() controlName: 'string';
   constructor() {}
 
   ngOnInit() {}

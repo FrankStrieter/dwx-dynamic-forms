@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="submitForm(f)" class="register">
+<form #f="ngForm" [formGroup]="form" (ngSubmit)="submitForm(f)" class="register">
   <!-- <mat-form-field >
     <mat-select 
     [(ngModel)]="salutation" 
@@ -21,7 +21,13 @@
 
   <libdf-checkbox [form]="form" [control]="this.testdata.terms"></libdf-checkbox>
 
-  <libdf-radiogroup [form]="form" [control]="this.testdata.RadioDemo"></libdf-radiogroup>
+  <libdf-radiogroup [form]="form" [control]="this.testdata.relationship"></libdf-radiogroup>
+
+
+  <ng-container formArrayName="tags" *ngFor="let item of form.get('tags').controls; index as i">
+      <libdf-input [form]="form.get('tags')" [control]="this.testdata.tags[i]"></libdf-input>
+  </ng-container>
+  
 
 <!-- <mat-form-field>
     <input 

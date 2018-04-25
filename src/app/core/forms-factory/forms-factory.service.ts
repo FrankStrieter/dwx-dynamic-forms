@@ -9,6 +9,7 @@ type AvailableControls =
   | ApiInputControl
   | ApiCheckboxControl
   | ApiRadiogroupControl;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -39,5 +40,12 @@ export class FormsFactoryService {
 
   createCustomControl(control: AvailableControls) {
     return this.controls[control.type](control);
+  }
+
+  createCustomControlArray(controls: AvailableControls[]) {
+    return controls.map((control, index) => {
+      control.name = index.toString();
+      return this.createCustomControl(control);
+    });
   }
 }

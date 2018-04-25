@@ -36,14 +36,37 @@ export class RegisterComponent {
       value: false,
       validators: [{ type: 'requiredTrue' }],
     },
-    RadioDemo: {
+    relationship: {
       type: 'radiogroup',
       label: 'Please choose',
-      name: 'RadioDemo',
+      name: 'relationship',
       value: '',
       options: [{ key: 'b2b', value: 'b2b' }, { key: 'b2c', value: 'b2c' }],
       validators: [],
     },
+    tags: [
+      {
+        type: 'input',
+        value: 'Priority 1',
+        placeholder: 'Tag',
+        kind: 'text',
+        validators: [{ type: 'required' }],
+      },
+      {
+        type: 'input',
+        value: 'Test 2',
+        placeholder: 'Tag',
+        kind: 'text',
+        validators: [{ type: 'required' }],
+      },
+      {
+        type: 'input',
+        value: 'Test 5',
+        placeholder: 'Tag',
+        kind: 'text',
+        validators: [{ type: 'required' }],
+      },
+    ],
   };
 
   constructor(formBuilder: FormBuilder, factory: FormsFactoryService) {
@@ -53,8 +76,14 @@ export class RegisterComponent {
           test,
           factory.createCustomControl(this.testdata[test])
         );
-      } else {
-        console.log(test);
+      } else if (Array.isArray(this.testdata[test])) {
+        this.form.addControl(
+          test,
+          formBuilder.array(
+            factory.createCustomControlArray(this.testdata[test])
+          )
+        );
+        console.log(this.form);
       }
     }
 
