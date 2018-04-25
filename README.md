@@ -1,6 +1,12 @@
 # DwxDf
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0-rc.5.
+
+## Preperation
+
+To use the Development server build the libraries of the project with `npm run build:libraries`
+
+If you want to build the app for production this is done automaticly.
 
 ## Development server
 
