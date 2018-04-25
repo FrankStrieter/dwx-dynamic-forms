@@ -1,18 +1,72 @@
-<form #f="ngForm" ngSubmit="submitForm(f)" class="register">
-  <mat-form-field >
-    <input placeholder="firstname" matInput name="firstname" type="text" [(ngModel)]="firstname">
+<form #f="ngForm" (ngSubmit)="submitForm(f)" class="register">
+  <!-- <mat-form-field >
+    <mat-select 
+    [(ngModel)]="salutation" 
+    name="salutation"
+      placeholder="salutation">
+      <mat-option value="mr">Mr</mat-option>
+      <mat-option value="mrs">Mrs</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <!-- <mat-form-field>   -->
+  <libdf-input [form]="form" [control]="this.testdata.name"></libdf-input>
+    <!-- <input 
+    matInput 
+    [(ngModel)]="firstname"
+    name="firstname" 
+    type="text" 
+    placeholder="firstname">  
+  </mat-form-field> -->
+
+  <libdf-checkbox [form]="form" [control]="this.testdata.terms"></libdf-checkbox>
+
+  <libdf-radiogroup [form]="form" [control]="this.testdata.RadioDemo"></libdf-radiogroup>
+
+<!-- <mat-form-field>
+    <input 
+    matInput 
+    [(ngModel)]="firstname"
+    name="firstname" 
+    type="text" 
+    placeholder="firstname"> 
+  </mat-form-field> 
+  <mat-form-field>
+    <input 
+    matInput 
+    [(ngModel)]="lastname"
+    name="lastname" 
+    type="text" 
+    placeholder="lastname"> 
   </mat-form-field>
   <mat-form-field>
-    <input matInput name="lastname" placeholder="lastname" type="text" [(ngModel)]="lastname">
+    <input 
+    matInput 
+    [(ngModel)]="street"
+    name="street" 
+    type="text" 
+    placeholder="street"> 
   </mat-form-field>
   <mat-form-field>
-    <input matInput name="street" placeholder="street" type="text" [(ngModel)]="street">
+    <input 
+    matInput 
+    [(ngModel)]="phone"
+    name="phone" 
+    type="text" 
+    placeholder="phone"> 
   </mat-form-field>
   <mat-form-field>
-    <input matInput name="phone" type="text" placeholder="phone" [(ngModel)]="phone">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput name="password" type="password" placeholder="password" [(ngModel)]="password">
-  </mat-form-field>
-  <button mat-button type="submit">Send</button>
+    <input 
+    matInput 
+    [(ngModel)]="password"
+    name="password" 
+    type="password" 
+    placeholder="password"> 
+  </mat-form-field> -->
+  <button 
+  [disabled]="!form.valid"
+  mat-button 
+  type="submit">
+  Send
+  </button>
 </form>

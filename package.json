@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build:libraries": "ng build --prod --project dynamic-forms && ng build --prod --project common-components",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",

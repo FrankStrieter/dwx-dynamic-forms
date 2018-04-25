@@ -7,6 +7,7 @@ import { CommonComponentsModule } from 'common-components';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { DynamicFormsModule } from 'dynamic-forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     ReactiveFormsModule,
     AuthenticationModule,
     CommonComponentsModule,
+    DynamicFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
