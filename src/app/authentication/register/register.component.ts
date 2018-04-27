@@ -154,7 +154,7 @@ export class RegisterComponent {
     sepa: {
       type: 'checkbox',
       label: 'SEPA geht klar',
-      name: 'okay',
+      name: 'sepa',
       value: true,
       validators: [],
     },
