@@ -21,11 +21,11 @@ export class RegisterComponent {
   form: FormGroup = new FormGroup({});
 
   formData: any = {
-    name: {
+    email: {
       type: 'input',
-      name: 'name',
-      value: 'Frank',
-      placeholder: 'Name',
+      name: 'email',
+      value: 'fs@co.IT.eu',
+      placeholder: 'E-Mail',
       kind: 'text',
       validators: [{ type: 'required' }],
     },
@@ -60,24 +60,24 @@ export class RegisterComponent {
       validators: [],
     },
 
-    address: {
+    name: {
       type: 'group',
-      name: 'address',
+      name: 'name',
       items: {
-        street: {
+        firstname: {
           type: 'input',
-          name: 'street',
-          value: 'Rosenplatz',
-          placeholder: 'Straße',
+          name: 'firstname',
+          value: 'Frank',
+          placeholder: 'Name',
           kind: 'text',
           validators: [{ type: 'required' }],
         },
-        number: {
+        lastname: {
           type: 'input',
-          value: '10',
-          placeholder: 'Hausnummer',
+          value: '',
+          placeholder: 'Nachname',
           kind: 'text',
-          name: 'number',
+          name: 'lastname',
           validators: [{ type: 'required' }],
         },
       },
@@ -100,6 +100,56 @@ export class RegisterComponent {
           placeholder: 'Tag',
           kind: 'text',
           validators: [{ type: 'required' }],
+        },
+      ],
+    },
+    addresses: {
+      type: 'array',
+      name: 'Adresses',
+      items: [
+        {
+          type: 'group',
+          name: 'address 1',
+          items: {
+            street: {
+              type: 'input',
+              name: 'street',
+              value: 'Rosenplatz',
+              placeholder: 'Straße',
+              kind: 'text',
+              validators: [{ type: 'required' }],
+            },
+            number: {
+              type: 'input',
+              value: '10',
+              placeholder: 'Hausnummer',
+              kind: 'text',
+              name: 'number',
+              validators: [{ type: 'required' }],
+            },
+          },
+        },
+        {
+          type: 'group',
+          name: 'address 2',
+          items: {
+            street: {
+              type: 'input',
+              name: 'street',
+              value: 'Kriegsstraße',
+              placeholder: 'Straße',
+              kind: 'text',
+              validators: [{ type: 'required' }],
+            },
+            number: {
+              type: 'input',
+              value: '39',
+              placeholder: 'Hausnummer',
+              kind: 'text',
+              name: 'number',
+              validators: [{ type: 'required' }],
+            },
+          },
         },
       ],
     },

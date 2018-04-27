@@ -43,10 +43,14 @@ export class FormsFactoryService {
     return this.controls[control.type](control);
   }
 
-  createCustomControlArray(controls: AvailableControls[] | any) {
+  createCustomControlArray(controls: AvailableControls[] | any, formGroup) {
     return controls.map((control, index) => {
-      control.name = index.toString();
-      return this.createCustomControl(control);
+      if (control.type !== 'group') {
+        control.name = index.toString();
+        return this.createCustomControl(control);
+      } else {
+        return this.createCustomControlGroup(control.items, new FormGroup({}));
+      }
     });
   }
 
@@ -56,7 +60,7 @@ export class FormsFactoryService {
         formGroup.addControl(
           property,
           this.formBuilder.array(
-            this.createCustomControlArray(formData[property].items)
+            this.createCustomControlArray(formData[property].items, formGroup)
           )
         );
       } else if (formData[property].type === 'group') {
