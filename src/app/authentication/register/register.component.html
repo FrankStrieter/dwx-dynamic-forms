@@ -1,40 +1,13 @@
 <form #f="ngForm" [formGroup]="form" (ngSubmit)="submitForm(f)" class="register">
-    <ng-container *ngFor="let c of formData | properties">
-      <ng-container [ngSwitch]="c.value.type">
-          <libdf-input *ngSwitchCase="'input'" [form]="form" [control]="c.value"></libdf-input>
-          <libdf-checkbox *ngSwitchCase="'checkbox'" [form]="form" [control]="c.value"></libdf-checkbox>
-          <libdf-radiogroup *ngSwitchCase="'radiogroup'" [form]="form" [control]="c.value"></libdf-radiogroup>
-        
-          <ng-container *ngSwitchCase="'array'">
-              <ng-container [formArrayName]="c.name" *ngFor="let item of form.get(c.name).controls; index as i">
-                  <ng-container [ngSwitch]="c.value.items[i].type">
-                      <libdf-input *ngSwitchCase="'input'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-input>
-                      <libdf-checkbox *ngSwitchCase="'checkbox'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-checkbox>
-                      <libdf-radiogroup *ngSwitchCase="'radiogroup'" [form]="form.get(c.name)" [control]="c.value.items[i]"></libdf-radiogroup>
-                  </ng-container>
-                </ng-container>
 
-          </ng-container>
-      
-        </ng-container>
-    <ng-container *ngIf="isArrayControl(c.value)">
-      
-    
-    </ng-container>
-  <!-- <ng-container formArrayName="tags" *ngFor="let item of form.get('tags').controls; index as i">
-      <libdf-input [form]="form.get('tags')" [control]="formdata.tags[i]"></libdf-input>
-  </ng-container> -->
-</ng-container>
+  <dwx-form [form]="form" [formData]="formData"></dwx-form>
 
-  <button 
-  [disabled]="!form.valid"
-  mat-button 
-  type="submit">
-  Send
+  <button [disabled]="!form.valid" mat-button type="submit">
+    Send
   </button>
 </form>
 <code>
-    <pre>
+  <pre>
 {{form.value | json}}
 </pre>
 </code>

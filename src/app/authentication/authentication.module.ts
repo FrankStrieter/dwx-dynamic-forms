@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { DynamicFormsModule } from 'dynamic-forms';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   imports: [
@@ -14,8 +14,7 @@ import { DynamicFormsModule } from 'dynamic-forms';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
-    DynamicFormsModule,
+    CoreModule,
   ],
   declarations: [RegisterComponent],
   exports: [RegisterComponent],

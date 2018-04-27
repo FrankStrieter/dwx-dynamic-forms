@@ -59,6 +59,30 @@ export class RegisterComponent {
       options: [{ key: 'b2b', value: 'b2b' }, { key: 'b2c', value: 'b2c' }],
       validators: [],
     },
+
+    address: {
+      type: 'group',
+      name: 'address',
+      items: {
+        street: {
+          type: 'input',
+          name: 'street',
+          value: 'Rosenplatz',
+          placeholder: 'Straße',
+          kind: 'text',
+          validators: [{ type: 'required' }],
+        },
+        number: {
+          type: 'input',
+          value: '10',
+          placeholder: 'Hausnummer',
+          kind: 'text',
+          name: 'number',
+          validators: [{ type: 'required' }],
+        },
+      },
+    },
+
     tags: {
       type: 'array',
       name: 'Tags',
@@ -77,41 +101,14 @@ export class RegisterComponent {
           kind: 'text',
           validators: [{ type: 'required' }],
         },
-        {
-          type: 'input',
-          value: 'Test 5',
-          placeholder: 'Tag',
-          kind: 'text',
-          validators: [{ type: 'required' }],
-        },
       ],
     },
   };
 
-  constructor(formBuilder: FormBuilder, factory: FormsFactoryService) {
-    for (const property in this.formData) {
-      if (this.formData[property].type !== 'array') {
-        this.form.addControl(
-          property,
-          factory.createCustomControl(this.formData[property])
-        );
-      } else if (this.formData[property].type === 'array') {
-        this.form.addControl(
-          property,
-          formBuilder.array(
-            factory.createCustomControlArray(this.formData[property].items)
-          )
-        );
-      }
-    }
-  }
+  constructor() {}
 
   submitForm(form: NgForm) {
     console.log(form.value);
     // this.apiService.post(url, form.value);
-  }
-
-  isArrayControl(control) {
-    return Array.isArray(control);
   }
 }

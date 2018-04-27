@@ -4,6 +4,7 @@ import { Checkbox, Input, Radiogroup } from 'dynamic-forms';
 import { ApiCheckboxControl } from '../models/api-checkbox-control';
 import { ApiInputControl } from '../models/api-input-control';
 import { ApiRadiogroupControl } from '../models/api-radiogroup-control';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 type AvailableControls =
   | ApiInputControl
@@ -15,7 +16,7 @@ type AvailableControls =
 })
 export class FormsFactoryService {
   controls;
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
     this.controls = {
       input: (control: ApiInputControl) =>
         FormsFactoryService.createInputControl(control),
@@ -42,10 +43,38 @@ export class FormsFactoryService {
     return this.controls[control.type](control);
   }
 
-  createCustomControlArray(controls: AvailableControls[]) {
+  createCustomControlArray(controls: AvailableControls[] | any) {
     return controls.map((control, index) => {
       control.name = index.toString();
       return this.createCustomControl(control);
     });
+  }
+
+  createCustomControlGroup(formData: any, formGroup: FormGroup) {
+    for (const property in formData) {
+      if (formData[property].type === 'array') {
+        formGroup.addControl(
+          property,
+          this.formBuilder.array(
+            this.createCustomControlArray(formData[property].items)
+          )
+        );
+      } else if (formData[property].type === 'group') {
+        formGroup.addControl(
+          formData[property].name,
+          this.createCustomControlGroup(
+            formData[formData[property].name].items,
+            new FormGroup({})
+          )
+        );
+      } else if (formData[property].type) {
+        formGroup.addControl(
+          property,
+          this.createCustomControl(formData[property])
+        );
+      }
+    }
+
+    return formGroup;
   }
 }
