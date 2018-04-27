@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { RadiogroupComponent } from './radiogroup/radiogroup.component';
 import { PropertiesPipe } from './modifiers/form-properties.pipe';
+import { MatSelectModule } from '@angular/material/select';
+import { SelectComponent } from './select/select.component';
 
 @NgModule({
   imports: [
@@ -15,15 +17,18 @@ import { PropertiesPipe } from './modifiers/form-properties.pipe';
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
   declarations: [
     InputComponent,
     CheckboxComponent,
     RadiogroupComponent,
+    SelectComponent,
     PropertiesPipe,
   ],
   exports: [
+    SelectComponent,
     InputComponent,
     CheckboxComponent,
     RadiogroupComponent,

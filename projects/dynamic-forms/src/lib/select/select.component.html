@@ -1,0 +1,7 @@
+<ng-container [formGroup]="form">
+
+<mat-select [placeholder]="control.label" [formControlName]="control.name">
+    <mat-option *ngFor="let option of control.options" [value]="option.value">{{option.key}}</mat-option>
+</mat-select>
+
+</ng-container>

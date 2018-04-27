@@ -29,40 +29,27 @@ export class RegisterComponent {
       kind: 'text',
       validators: [{ type: 'required' }],
     },
-    lastname: {
-      type: 'input',
-      name: 'lastname',
-      value: '',
-      placeholder: 'Nachname',
-      kind: 'text',
-      validators: [{ type: 'required' }],
-    },
-    terms: {
-      type: 'checkbox',
-      label: 'Accept Terms & Conditions',
-      name: 'terms',
-      value: false,
-      validators: [{ type: 'requiredTrue' }],
-    },
-    okay: {
-      type: 'checkbox',
-      label: 'Sparbuch überschreiben',
-      name: 'okay',
-      value: true,
-      validators: [],
-    },
     relationship: {
       type: 'radiogroup',
-      label: 'Please choose',
+      label: 'Geschäftsbeziehung',
       name: 'relationship',
       value: 'b2b',
       options: [{ key: 'b2b', value: 'b2b' }, { key: 'b2c', value: 'b2c' }],
       validators: [],
     },
+    salutation: {
+      type: 'select',
+      label: 'Anrede',
+      name: 'salutation',
+      value: '',
+      options: [{ key: 'Mr', value: 'mr' }, { key: 'Mrs', value: 'mrs' }],
+      validators: [{ type: 'required' }],
+    },
 
     name: {
       type: 'group',
       name: 'name',
+      label: 'Name',
       items: {
         firstname: {
           type: 'input',
@@ -85,7 +72,8 @@ export class RegisterComponent {
 
     tags: {
       type: 'array',
-      name: 'Tags',
+      name: 'tags',
+      label: 'Infos',
       items: [
         {
           type: 'input',
@@ -105,10 +93,12 @@ export class RegisterComponent {
     },
     addresses: {
       type: 'array',
-      name: 'Adresses',
+      label: 'Adressen',
+      name: 'addresses',
       items: [
         {
           type: 'group',
+          label: 'Privatadresse',
           name: 'address 1',
           items: {
             street: {
@@ -132,6 +122,7 @@ export class RegisterComponent {
         {
           type: 'group',
           name: 'address 2',
+          label: 'Geschäftsadresse',
           items: {
             street: {
               type: 'input',
@@ -152,6 +143,20 @@ export class RegisterComponent {
           },
         },
       ],
+    },
+    terms: {
+      type: 'checkbox',
+      label: 'Accept Trems & Conditions',
+      name: 'terms',
+      value: false,
+      validators: [{ type: 'requiredTrue' }],
+    },
+    sepa: {
+      type: 'checkbox',
+      label: 'SEPA geht klar',
+      name: 'okay',
+      value: true,
+      validators: [],
     },
   };
 
