@@ -7,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AdminFormArrayComponent implements OnInit {
   @Input() control;
+  edit: boolean = false;
   constructor() {}
 
   ngOnInit() {}
+  toggleEdit(event) {
+    this.edit = !this.edit;
+  }
 }
