@@ -1,0 +1,70 @@
+<div (dblclick)="toggleEdit()"><b>Control</b></div>
+<form *ngIf="control && edit; else infos" [formGroup]="form" >
+    <mat-form-field>
+  <mat-select name="type" formControlName="type">
+      <mat-option value="input">Input</mat-option>
+      <mat-option value="doubleinput">Input with Validation</mat-option>
+      <mat-option value="checkbox">Checkbox</mat-option>
+      <mat-option value="radiogroup">Radiogroup</mat-option>
+      <mat-option value="select">Select</mat-option>
+  </mat-select>
+</mat-form-field>
+  <mat-form-field *ngIf="(form.get('type').value === 'input' || form.get('type').value ==='doubleinput'); else options">
+  <mat-select  name="inputtype" formControlName="inputtype" placeholder="Input-Typ">
+      <mat-option value="password">Password</mat-option>
+      <mat-option value="text">Text</mat-option>
+      <mat-option value="number">Number</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-select multiple name="validators" formControlName="validators" placeholder="Validators">
+      <mat-option [value]="{type: 'required'}">required</mat-option>
+      <mat-option [value]="{type: 'requiredTrue'}">RequiredTrue</mat-option>
+      <mat-option [value]="{type: 'email'}">Email</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="name" (blur)="updateControl()" placeholder="Name" formControlName="name" >
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="placeholder" placeholder="Placeholder" formControlName="placeholder" >
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="label" placeholder="Label" formControlName="label" >
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="value" placeholder="Value" formControlName="value" >
+</mat-form-field>
+
+<ng-template #options>
+ <div formArrayName="options" *ngIf="form.get('type').value !== 'checkbox'">
+  <div *ngFor="let option of form.get('options')['controls']; index as i">
+    <div [formGroupName]="i">
+    <mat-form-field class="form-6">
+  <input
+    matInput 
+    name="key" placeholder="Key" formControlName="key" 
+  ></mat-form-field>
+  <mat-form-field class="form-6">
+  <input
+    matInput 
+    name="value" placeholder="Value" formControlName="value"
+  >
+</mat-form-field>
+  <button mat-mini-fab color="warn" (click)="removeOption(i)">-</button>
+ </div>
+</div>
+ <button mat-mini-fab color="accent" (click)="addOption()">+</button>
+</div>
+
+</ng-template>
+<button mat-raised-button (click)="toggleEdit()">Accept</button>
+</form>
+<ng-template #infos>
+  <div (dblclick)="toggleEdit()">
+ 
+<div>Name: {{control.name}}</div>
+<div>Typ: {{control.type}} || {{control.inputtype}}</div>
+
+</div>
+</ng-template>

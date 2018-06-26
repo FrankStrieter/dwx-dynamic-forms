@@ -1,0 +1,20 @@
+
+<mat-form-field>
+  <input
+    matInput
+    formControlName="input"
+    (ngOnChanges)="propagateInput()"
+    [type]="control.inputtype"
+    [placeholder]="control.placeholder">
+</mat-form-field>
+<mat-form-field>
+  <input
+    matInput
+    [pattern]="'^'+input+'$'"
+    formControlName="verification"
+    (ngOnChanges)="propagateInput()"
+    [type]="control.inputtype"
+    [placeholder]="'Verify '+ control.placeholder">
+    <mat-error *ngIf="!valid">{{control.placeholder}}-Fields did not match</mat-error>
+</mat-form-field>
+

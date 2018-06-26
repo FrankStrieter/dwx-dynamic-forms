@@ -1,0 +1,65 @@
+<div class="builder-source" fxFlex="20%">
+  <h4>Wählen Sie die Elemente, die im Formular enthalten sein sollen...</h4>
+
+  <ngx-dnd-container
+    class="root-container"
+    [model]="sourceBuilderTools"
+    [dropZones]="['builder-target']"
+    [copy]="true">
+    <ng-template let-item="model" let-template="template" #template>
+      <div [ngSwitch]="item.type">
+        <dwx-admin-form-group [control]="item" *ngSwitchCase="'group'"></dwx-admin-form-group>
+        <dwx-admin-form-array [control]="item" *ngSwitchCase="'array'"></dwx-admin-form-array>
+        <dwx-admin-form-input [control]="item" *ngSwitchDefault></dwx-admin-form-input>
+      </div>
+    </ng-template>
+  </ngx-dnd-container>
+</div>
+
+<h4>... und ziehen Sie die Elemente hier her</h4>
+<ngx-dnd-container
+class="root-container"
+[model]="targetBuilderTools"
+dropZone="builder-target"
+[removeOnSpill]="true"
+(drop)="update($event)"
+(remove)="update($event)"
+(drag)="update($event)">
+<ng-template let-model="model" >
+  <div [ngSwitch]="model.type">
+    <div *ngSwitchCase="'array'">
+        <dwx-admin-form-array [control]="model"></dwx-admin-form-array>
+      <ngx-dnd-container
+           dropZone="builder-target"
+           [model]="model.items"
+           [removeOnSpill]="true"
+           [template]="template"
+           (drop)="update($event)">
+           
+         </ngx-dnd-container>
+         
+    </div>
+    <div *ngSwitchCase="'group'">
+      <dwx-admin-form-group [control]="model"></dwx-admin-form-group>
+         <ngx-dnd-container
+           dropZone="builder-target"
+           [model]="model.items"
+           [removeOnSpill]="true"
+           [template]="template"
+           (drop)="update($event)">
+         </ngx-dnd-container>
+       
+    </div>
+    <div *ngSwitchDefault>
+      <dwx-admin-form-input
+        [control]="model"
+        (update)="update()"
+        >
+      </dwx-admin-form-input>
+    </div>
+  </div>
+</ng-template>
+</ngx-dnd-container>
+<pre>
+{{parsedFormData | json}}
+</pre>

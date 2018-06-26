@@ -1,0 +1,11 @@
+<ng-container 
+    [formGroup]="form">
+<mat-form-field> 
+<input 
+    matInput
+    [type]="control.inputtype" 
+    [placeholder]="control.placeholder" 
+    [formControlName]="control.name">
+    <mat-error *ngFor="let error of form.controls[control.name].errors | properties">{{error.name}}</mat-error>
+</mat-form-field>
+</ng-container>

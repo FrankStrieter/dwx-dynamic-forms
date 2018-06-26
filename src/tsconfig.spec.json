@@ -7,7 +7,15 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "common-components": [
+        "../dist/common-components"
+      ],
+      "dynamic-forms": [
+        "../dist/dynamic-forms"
+      ]
+    }
   },
   "files": [
     "test.ts",

@@ -1,0 +1,17 @@
+<div (dblclick)="toggleEdit()">
+  <b>Group</b>
+</div>
+<form *ngIf="control && edit; else infos">
+<mat-form-field>
+  <input matInput name="name" placeholder="Name" [(ngModel)]="control.name" >
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="label" placeholder="Label" [(ngModel)]="control.label" >
+</mat-form-field>
+</form>
+<div (dblclick)="toggleEdit()">
+<ng-template #infos >
+Name: {{control.name}}
+Label: {{control.label}}
+</ng-template>
+</div>

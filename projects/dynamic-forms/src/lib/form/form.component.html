@@ -1,0 +1,42 @@
+<ng-container 
+  [formGroup]="form" 
+  *ngFor="let c of formData | properties">
+  <ng-container 
+    [ngSwitch]="c.value.type" 
+    *ngIf="form">
+    <libdf-input 
+      *ngSwitchCase="'input'" 
+      [form]="form" 
+      [control]="c.value">
+    </libdf-input>
+    <libdf-checkbox 
+      *ngSwitchCase="'checkbox'" 
+      [form]="form" 
+      [control]="c.value">
+    </libdf-checkbox>
+    <libdf-radiogroup 
+      *ngSwitchCase="'radiogroup'" 
+      [form]="form" 
+      [control]="c.value">
+    </libdf-radiogroup>
+    <libdf-select 
+      *ngSwitchCase="'select'" 
+      [form]="form" 
+      [control]="c.value">
+    </libdf-select>
+    <libdf-double-input-verification 
+      *ngSwitchCase="'doubleinput'" 
+      [form]="form" 
+      [formControlName]="c.value.name" 
+      [control]="c.value">
+    </libdf-double-input-verification>
+    <ng-container *ngSwitchCase="'array'">
+        <h3>{{c.value.label}}</h3>
+      <dwx-form [form]="form.get(c.name)" [formData]="c.value.items"></dwx-form>
+    </ng-container>
+    <ng-container *ngSwitchCase="'group'">
+      <h3>{{c.value.label}}</h3>
+      <dwx-form [formData]="c.value.items" [form]=form.get(c.name)></dwx-form>
+    </ng-container>
+  </ng-container>
+</ng-container>

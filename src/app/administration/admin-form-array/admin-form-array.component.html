@@ -1,0 +1,9 @@
+<form *ngIf="control">
+<mat-form-field>
+  <input matInput name="name" placeholder="Name" [(ngModel)]="control.name" >
+</mat-form-field>
+<mat-form-field>
+  <input matInput name="label" placeholder="Label" [(ngModel)]="control.label" >
+</mat-form-field>
+</form>
+<div>Array</div>

@@ -1,13 +1,12 @@
-<form #f="ngForm" [formGroup]="form" (ngSubmit)="submitForm(f)" class="register">
 
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()" class="register">
   <dwx-form [form]="form" [formData]="formData"></dwx-form>
-
   <button [disabled]="!form.valid" mat-button type="submit">
     Send
   </button>
 </form>
 <code>
   <pre>
-{{form.value | json}}
-</pre>
+    {{form.value | json}}
+  </pre>
 </code>
