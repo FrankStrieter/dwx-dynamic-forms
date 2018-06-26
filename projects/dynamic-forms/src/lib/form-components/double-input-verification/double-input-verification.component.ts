@@ -20,10 +20,8 @@ import { Input as CustomInput } from '../../core/models/forms/input';
   ],
 })
 export class DoubleInputVerificationComponent implements ControlValueAccessor {
-  form = new FormGroup({
-    input: new FormControl(''),
-    versification: new FormControl(''),
-  });
+  input: string;
+  verification: string;
   @Input() control: CustomInput;
   @Input() form: FormGroup;
   valid = false;
